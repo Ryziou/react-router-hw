@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router"
 import { birdsIndex } from "../../services/birds"
+import './BirdsIndex.css'
 
 export default function BirdsIndex() {
     const [ birds, setBirds ] = useState([])
@@ -29,7 +30,7 @@ export default function BirdsIndex() {
             {error
                 ? <p className="error">{error}</p>
                 : loading
-                    ? <p>Loading...</p>
+                    ? <p className="loading">Loading...</p>
                     : birds.length > 0
                         ? birds.map(bird => (
                             <Link key={bird._id} to={`/birds/${bird._id}`}>
@@ -38,7 +39,7 @@ export default function BirdsIndex() {
                                 </article>
                             </Link>
                         ))
-                        : <p>No Birds have been found.</p>
+                        : <p>Birds are hibernating. Please try again later.</p>
             }
         </section>
         </>
