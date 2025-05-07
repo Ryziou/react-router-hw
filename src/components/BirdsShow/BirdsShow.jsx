@@ -7,7 +7,7 @@ export default function BirdsShow() {
 
     const { birdId } = useParams()
 
-    const { data: bird, isLoading, error } = useFetch(() => singleBird(birdId), {})
+    const { data: bird, isLoading, error } = useFetch(singleBird, {}, [birdId])
 
 
     return (
