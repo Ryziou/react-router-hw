@@ -1,36 +1,20 @@
 import { singleBird } from "../../services/birds"
 import { useParams } from "react-router"
-import { useEffect, useState } from "react"
+import useFetch from "../../hooks/useFetch"
 import './BirdsShow.css'
 
 export default function BirdsShow() {
 
-    const [ bird, setBird ] = useState([])
-    const [ error, setError ] = useState('')
-    const [ loading, setLoading ] = useState(true)
-
     const { birdId } = useParams()
 
-    useEffect(() => {
-        async function getBird() {
-            try {
-                const { data } = await singleBird(birdId)
-                setBird(data)
-            } catch {
-                setError('The bird flew away. Please try again later.')
-            } finally {
-                setLoading(false)
-            }
-        }
-        getBird()
-    }, [birdId])
+    const { data: bird, isLoading, error } = useFetch(() => singleBird(birdId), {})
 
 
     return (
         <>
         {error
             ? <p className="error">{error}</p>
-            : loading
+            : isLoading
                 ? <p className="loading">Loading bird data...</p>
                 : (
                     <section className="single-bird-container">
