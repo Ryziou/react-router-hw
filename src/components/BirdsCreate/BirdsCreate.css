@@ -1,0 +1,38 @@
+#form-page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  form.form {
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  form.form h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-control {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-control label {
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+  }
+  
+  .input-control input,
+  .input-control textarea {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  

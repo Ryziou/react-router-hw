@@ -8,7 +8,8 @@ export default function Navbar() {
                 <NavLink to='/'>🌍</NavLink>
             </div>
             <nav>
-                <a href="/birds">Birds</a>
+                <NavLink to="/birds/new">Add New Bird</NavLink>
+                <NavLink to="/birds">Birds</NavLink>
             </nav>
         </header>
     )

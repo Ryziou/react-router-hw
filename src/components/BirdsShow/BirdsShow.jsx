@@ -1,5 +1,6 @@
 import { singleBird } from "../../services/birds"
-import { useParams } from "react-router"
+import BirdsDelete from "../BirdsDelete/BirdsDelete"
+import { useParams, Link } from "react-router"
 import useFetch from "../../hooks/useFetch"
 import './BirdsShow.css'
 
@@ -7,7 +8,7 @@ export default function BirdsShow() {
 
     const { birdId } = useParams()
 
-    const { data: bird, isLoading, error } = useFetch(singleBird, {}, [birdId])
+    const { data: bird, isLoading, error } = useFetch(singleBird, {}, birdId)
 
 
     return (
@@ -18,7 +19,10 @@ export default function BirdsShow() {
                 ? <p className="loading">Loading bird data...</p>
                 : (
                     <section className="single-bird-container">
+                        <Link to={`/birds/${birdId}/edit`} className="button">Edit</Link>
+                        <BirdsDelete />
                         <div className="bird-title">
+                            
                             <h1>{bird.species}</h1>
                         </div>
                         <div className="bird-info">
@@ -33,7 +37,6 @@ export default function BirdsShow() {
                             <h3>Diet: </h3>
                             <p>{bird.diet}</p>
                         </div>
-
                     </section>
                 )
         }
