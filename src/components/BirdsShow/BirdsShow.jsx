@@ -2,14 +2,18 @@ import { singleBird } from "../../services/birds"
 import BirdsDelete from "../BirdsDelete/BirdsDelete"
 import { useParams, Link } from "react-router"
 import useFetch from "../../hooks/useFetch"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
 import './BirdsShow.css'
 
 export default function BirdsShow() {
 
     const { birdId } = useParams()
+    const { user } = useContext(UserContext)
+
+    
 
     const { data: bird, isLoading, error } = useFetch(singleBird, {}, birdId)
-
 
     return (
         <>
@@ -35,9 +39,10 @@ export default function BirdsShow() {
                             <h3>Diet: </h3>
                             <p>{bird.diet}</p>
                         </div>
-
-                        <Link to={`/birds/${birdId}/edit`} className="button">Edit</Link>
-                        <BirdsDelete />
+                        { user && user._id === bird.owner && <div className="controls">
+                            <Link to={`/birds/${birdId}/edit`} className="button">Edit</Link> 
+                            <BirdsDelete />
+                        </div> }
                     </section>
                 )
         }

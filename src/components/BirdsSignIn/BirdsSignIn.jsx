@@ -1,9 +1,12 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { signIn } from "../../services/users"
 import { useNavigate } from "react-router"
-import { setToken } from "../../lib/users"
+import { setToken, getUserFromToken } from "../../lib/users"
+import { UserContext } from "../../contexts/UserContext"
 
 export default function BirdsSignIn() {
+
+    const { setUser } = useContext(UserContext)
 
     const [ formData, setFormData ] = useState({
         email: '',
@@ -22,6 +25,7 @@ export default function BirdsSignIn() {
         try {
             const { data } = await signIn(formData)
             setToken(data.token)
+            setUser(getUserFromToken())
             navigate('/birds')
         } catch {
             setError({ message: 'Invalid username or password'})

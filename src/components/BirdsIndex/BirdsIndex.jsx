@@ -6,7 +6,7 @@ import './BirdsIndex.css'
 export default function BirdsIndex() {
 
     const { data: birds, isLoading, error } = useFetch(birdsIndex, [])
-
+    
     return (
         <>
             <h1>Birds</h1>
