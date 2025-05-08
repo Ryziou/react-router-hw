@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router"
 import './BirdsCreate.css'
 import { createBird } from "../../services/birds";
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 
 export default function BirdsCreate() {
@@ -84,6 +85,8 @@ export default function BirdsCreate() {
                     <textarea name="diet" id="diet" cols="30" rows="3" placeholder="Mostly fish, but they also eat birds, small mammals, and dead animals" onChange={handleChange} value={formData.diet} required></textarea>
                     {error.diet && <p>{error.diet}</p>}
                 </div>
+                
+                <ErrorMessage message={error.message}/>
 
                 <button type="submit">{ isLoading ? 'Creating Bird...' : 'Add Bird'}</button>
             </form>

@@ -25,8 +25,8 @@ export default function BirdsDelete() {
 
         return (
             <>
-            { error && <p>{error}</p>}
             <button onClick={handleDelete}>{isLoading ? 'Deleting...' : 'Delete'}</button>
+            { error && <p className="error">{error}</p>}
             </>
         )
 }

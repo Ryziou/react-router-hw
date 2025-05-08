@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate} from "react-router"
 import { singleBird, editBird } from "../../services/birds"
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 export default function BirdsEdit() {
         const [ formData, setFormData ] = useState({
@@ -87,6 +88,8 @@ export default function BirdsEdit() {
                     <textarea name="diet" id="diet" cols="30" rows="3"  onChange={handleChange} value={formData.diet} required></textarea>
                     {error.diet && <p>{error.diet}</p>}
                 </div>
+
+                <ErrorMessage message={error.message}/>
 
                 <button type="submit">{ isLoading ? 'Editing Bird...' : 'Edit Bird'}</button>
             </form>

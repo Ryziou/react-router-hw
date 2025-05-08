@@ -19,8 +19,6 @@ export default function BirdsShow() {
                 ? <p className="loading">Loading bird data...</p>
                 : (
                     <section className="single-bird-container">
-                        <Link to={`/birds/${birdId}/edit`} className="button">Edit</Link>
-                        <BirdsDelete />
                         <div className="bird-title">
                             
                             <h1>{bird.species}</h1>
@@ -37,6 +35,9 @@ export default function BirdsShow() {
                             <h3>Diet: </h3>
                             <p>{bird.diet}</p>
                         </div>
+
+                        <Link to={`/birds/${birdId}/edit`} className="button">Edit</Link>
+                        <BirdsDelete />
                     </section>
                 )
         }
