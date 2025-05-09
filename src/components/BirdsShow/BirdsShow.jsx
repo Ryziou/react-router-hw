@@ -39,7 +39,8 @@ export default function BirdsShow() {
                             <h3>Diet: </h3>
                             <p>{bird.diet}</p>
                         </div>
-                        { user && user._id === bird.owner && <div className="controls">
+                        { user && bird.owner && user._id === bird.owner && 
+                        <div className="controls">
                             <Link to={`/birds/${birdId}/edit`} className="button">Edit</Link> 
                             <BirdsDelete />
                         </div> }

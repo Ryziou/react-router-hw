@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react"
-import { useParams, useNavigate} from "react-router"
+import { useState, useEffect, useContext } from "react"
+import { useParams, useNavigate, Navigate} from "react-router"
 import { singleBird, editBird } from "../../services/birds"
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import { UserContext } from "../../contexts/UserContext"
 
 export default function BirdsEdit() {
+        const { user } = useContext(UserContext)
+
         const [ formData, setFormData ] = useState({
             species: '',
             subspecies: '',
@@ -47,6 +50,14 @@ export default function BirdsEdit() {
         }
         getBirdData()
     }, [birdId])
+
+    if (!user) {
+        return <Navigate to='/register'/>
+    }
+
+    if (formData.owner && formData.owner !== user._id) {
+        return <Navigate to='/'/>
+    }
 
     return (
         <section id="form-page">

@@ -1,11 +1,15 @@
-import { useState } from "react";
-import { useNavigate } from "react-router"
+import { useContext, useState } from "react";
+import { useNavigate, Navigate } from "react-router"
 import './BirdsCreate.css'
 import { createBird } from "../../services/birds";
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import { UserContext } from "../../contexts/UserContext";
 
 
 export default function BirdsCreate() {
+
+    const { user } = useContext(UserContext)
+
     const [ formData, setFormData ] = useState({
         species: '',
         subspecies: '',
@@ -43,6 +47,10 @@ export default function BirdsCreate() {
 
     async function handleChange(event) {     
         setFormData({ ...formData, [event.target.name]: event.target.value })
+    }
+
+    if (!user) {
+        return <Navigate to='/register'/>
     }
 
     return (

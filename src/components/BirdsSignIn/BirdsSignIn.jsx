@@ -1,12 +1,12 @@
 import { useState, useContext } from "react"
 import { signIn } from "../../services/users"
-import { useNavigate } from "react-router"
+import { Navigate, useNavigate } from "react-router"
 import { setToken, getUserFromToken } from "../../lib/users"
 import { UserContext } from "../../contexts/UserContext"
 
 export default function BirdsSignIn() {
 
-    const { setUser } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
 
     const [ formData, setFormData ] = useState({
         email: '',
@@ -26,7 +26,7 @@ export default function BirdsSignIn() {
             const { data } = await signIn(formData)
             setToken(data.token)
             setUser(getUserFromToken())
-            navigate('/birds')
+            navigate('/loggedin')
         } catch {
             setError({ message: 'Invalid username or password'})
         } finally {
@@ -37,6 +37,10 @@ export default function BirdsSignIn() {
     function handleChange({ target: {name, value}}) {
         setFormData({ ...formData, [name]: value})
         setError({ ...error, [name]: ''})
+    }
+
+    if (user) {
+        return <Navigate to="/loggedin"/>
     }
 
     return (
