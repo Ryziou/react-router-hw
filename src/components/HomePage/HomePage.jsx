@@ -8,7 +8,7 @@ export default function HomePage() {
         <main>
             <div className="home">
             <h1>Bird Api</h1>
-            <p>Welcome back, {user.username}</p>
+            {user && <p>Welcome back, {user.username}</p>}
             </div>
         </main>
     )
